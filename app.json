@@ -1,0 +1,29 @@
+{
+  "name": "Tabbycat",
+  "description": "Tabbycat debate tab system deployed to Heroku",
+  "repository": "https://github.com/TabbycatDebate/tabbycat",
+  "keywords": ["debate", "tabbycat", "django"],
+  "buildpacks": [
+    { "url": "heroku/python" }
+  ],
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "Django secret key",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "Enable debug mode",
+      "value": "False"
+    },
+    "ALLOWED_HOSTS": {
+      "description": "Allowed hosts",
+      "value": "*"
+    }
+  },
+  "scripts": {
+    "postdeploy": "python manage.py migrate && python manage.py collectstatic --noinput"
+  }
+}
